@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+
+    <persistence-unit name="persistence-unit" transaction-type="JTA">
+
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <jta-data-source>java:comp/DefaultDataSource</jta-data-source>
+
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+            <property name="hibernate.generate_statistics" value="true" />
+            <property name="hibernate.show_sql" value="true" />
+
+            <property name="javax.persistence.schema-generation.create-source" value="metadata"/>
+            <property name="javax.persistence.schema-generation.scripts.action" value="create"/>
+            <property name="javax.persistence.schema-generation.scripts.create-target" value="schema.sql"/>
+
+            <property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.SunOneJtaPlatform"/>
+
+            <!-- Payara  Datasource Attrs
+                JDBC Connection Pool
+                    Pool Name: PostgrePool
+                    Resource Type: javax.sql.DataSource
+                    Datasource ClassName: org.postgresql.ds.PGPoolingDataSource
+                JDBC Resource
+                    JNDI Name: jdbc/__default
+                    Logical JNDI Name: java:comp/DefaultDataSource
+                    Connection Pool: PostgrePool (@From JDBC Connection Pool)
+
+                JDBC Connection Pool Attributes
+                    url & user & password
+
+                        <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
+                        <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/personservice" />
+                        <property name="javax.persistence.jdbc.user" value="postgres" />
+                        <property name="javax.persistence.jdbc.password" value="postgres" />
+            -->
+        </properties>
+    </persistence-unit>
+
+</persistence>
